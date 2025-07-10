@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Creative Visuals - Photographer & Videographer</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+  /* Reset & base */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #111;
+    color: #eee;
+    scroll-behavior: smooth;
+  }
+
+  /* Navbar */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    z-index: 1000;
+  }
+  nav a {
+    color: #00ffcc;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+  nav a:hover {
+    color: #00b399;
+  }
+
+  /* Section styling */
+  section {
+    padding: 6rem 2rem 4rem 2rem;
+    max-width: 95vw;
+    margin: auto;
+  }
+
+  /* Home */
+  #home {
+    height: 90vh;
+    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    scroll-margin-top: 80px; /* to adjust for fixed navbar */
+  }
+  #home h1 {
+    font-size: 4rem;
+    margin-bottom: 0.3rem;
+    text-shadow: 0 0 10px #00ffcc;
+  }
+  #home p {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 5px #00ffcc;
+  }
+  #home a.button {
+    background: #00ffcc;
+    color: #111;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: background 0.3s;
+  }
+  #home a.button:hover {
+    background: #00b399;
+  }
+
+  /* Portfolio */
+  #portfolio {
+    scroll-margin-top: 80px;
+  }
+  #portfolio h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  #portfolio .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 1.5rem;
+  }
+  #portfolio .gallery img {
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  #portfolio .gallery img:hover {
+    transform: scale(1.05);
+  }
+
+  /* About */
+  #about {
+    background: #222;
+    padding-top: 3rem;
+    scroll-margin-top: 80px;
+    height: 800px;
+  }
+  #about h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  #about .about-content {
+    max-width: 700px;
+    margin: auto;
+    text-align: center;
+  }
+  #about img {
+    width: 150px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+  }
+  #about p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  /* Contact */
+  #contact {
+    scroll-margin-top: 80px;
+  }
+  #contact h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  #contact .contact-info {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    font-size: 1.1rem;
+  }
+  #contact .contact-info p {
+    margin-bottom: 1rem;
+  }
+  #contact .contact-info i {
+    color: #00ffcc;
+    margin-right: 10px;
+  }
+  #contact form {
+    max-width: 600px;
+    margin: 2rem auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  #contact form input,
+  #contact form textarea {
+    padding: 0.8rem;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+  }
+  #contact form textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  #contact form button {
+    background: #00ffcc;
+    border: none;
+    padding: 1rem;
+    font-weight: bold;
+    color: #111;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background 0.3s;
+  }
+  #contact form button:hover {
+    background: #00b399;
+  }
+
+  /* Footer */
+  footer {
+    background: #000;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 3rem;
+  }
+
+  .whatsapp-link {
+    display: inline-block;
+    margin-top: 1rem;
+    background: #25D366;
+    color: white;
+    padding: 0.7rem 1.2rem;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+  }
+  .whatsapp-link:hover {
+    background: #1ebe5d;
+  }
+  /* Responsive tweaks */
+  @media (max-width: 600px) {
+    #home h1 {
+      font-size: 2.5rem;
+    }
+    #home p {
+      font-size: 1.1rem;
+    }
+  }
+  .image {
+    font-family: cursive;
+    text-shadow: 5px 5px 0.4px #555;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+  
+    }
+    .services{
+       display: flex;
+       gap: 20px;
+    }
+    .studio{
+      font-family: cursive;
+    }
+    .videography{
+     flex: 1;
+     padding: 5vw;
+     background-color: lightslategray;
+     text-align: center;
+     border-radius: 5%;
+    }
+    
+.stakeholders {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  #box {
+    background: #5c755e;
+    color: black;
+    border-radius: 20px;
+    border: 2px solid aqua;
+    width: 90%;
+    height: auto;
+    max-width: 95vw;
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 0 10px white;
+    overflow: auto;
+    flex-wrap: wrap;
+  }
+
+  .profile {
+    flex: 0 0 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .info {
+    flex: 1;
+    font-size: 1rem;
+    line-height: 1.5;
+    align-self: center;
+  }
+
+  @media (max-width: 480px) {
+    #box {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .profile {
+      margin-bottom: 1rem;
+    }
+
+    .info {
+      width: 100%;
+    }
+  }
+
+    .yaka {
+      display: flex;
+      align-items: center;
+      margin-left: 5vw;
+      padding: 30px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      
+    }
+
+    .unique-box {
+      flex: 1;
+      text-align: center;
+      background: #eee;
+      height: 30vw;
+      max-width: 200px;
+      max-height: 200px;
+      border-radius: 50%;
+      margin-right: 30px;
+     border-radius: 50%;
+      margin-top: 2em;
+    }
+
+    .unique-box img {
+      object-fit: cover;
+ width: 30vw;
+      height: 30vw;
+      max-width: 200px;
+      max-height: 200px;
+      border-radius: 50%;
+    }
+
+    .welcome-box {
+      flex: 2;
+      font-size: 1.2em;
+      width: 40vw;
+      height: auto;
+    }
+
+    .typing-text {
+      display: inline;
+      border-right: 2px solid #007BFF;
+      white-space: nowrap;
+      overflow: hidden;
+      color: #007BFF;
+      text-shadow: 0 0 5px #007BFF, 0 0 10px #007BFF, 0 0 20px #007BFF;
+    }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+  <a href="#stakeholders">Stakeholders</a>
+</nav>
+ <div class="yaka">
+    <div class="unique-box">
+        <p>studio logo</p>
+      <img src="" alt="Unique Image">
+    </div>
+
+    <div class="welcome-box">
+      <h3><span class="typing-text" id="typing"></span></h3>
+    </div>
+  </div>
+<section id="home">
+  <h1>Creative Visuals</h1>
+  <p>Capturing Moments, Crafting Stories</p>
+  <a href="#portfolio" class="button">View Portfolio</a>
+</section>
+
+
+
+<section id="about">
+  <h2>About Me</h2>
+  <div class="about-content">
+    <img src="c:\Users\kerambo francis\Desktop\yakadoka\Peachy_20250226_150243381.jpg" alt="Photographer" />
+    <p>Hello! I'm Yakadoka Tandaza from Ntimaru Migori County, I am Creative Visuals, a passionate photographer and videographer dedicated to capturing the essence of moments and turning them into unforgettable stories. With years of experience, I blend creativity and technique to produce stunning visuals.</p>
+  </div>
+  <section id="services">
+    <h2 >Services offered:</h2>
+   <div class="services">
+    <div class="videography">
+  <p style="text-align: center;color:#000">videography: 
+    <ul>
+      <li>movie shooting </li>
+      <li>Event shooting i.e wedding e.t.c</li>
+      <li>choir shooting</li>
+      <li>live shooting</li>
+      <li>short clips shooting e.t.c</li>
+    </ul>
+    </p>
+    </div>
+    <div  class="videography">
+     <p style="text-align: center;color:#000">Photography:
+    <ul>
+      <li>photo shooting</li> 
+      <li>passport e.t.c</li>
+    </li>
+    
+  </ul>
+  </p> 
+  </div>
+    </div>
+  
+</section>
+</section>
+
+
+<section id="contact">
+  <h2 class="contact">Contact Me</h2>
+  <div class="contact-info">
+    <p>
+      <a href="https://wa.me/+254743804600" target="_blank" class="whatsapp-link">
+        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+      </a>
+    </p>
+    <p>
+      <a href="mailto:kerambofrancis7@gmail.com">
+        <i class="fas fa-envelope"></i> email me
+      </a>
+    </p>
+    <p>
+      <a href="tel:+254757211529">
+        <i class="fas fa-phone"></i> +254757211529
+      </a>
+    </p>
+  
+    <p>
+      <i class="fab fa-facebook"></i>
+      <i class="fab fa-instagram"></i>
+      <i class="fab fa-twitter"></i>
+    </p>
+  </div>
+
+<section id="portfolio">
+  <h2>Portfolio</h2>
+  
+    <p class="image">Sample Image preview</p>
+  <div class="gallery">
+    
+    <img src="Peachy_20250704_190331887[1].jpg" alt="Photography 2" />
+   
+    <img src="Peachy_20250709_192441215[1].jpg" alt="Photography 4" />
+     <img src="Peachy_20250630_185933676 (1)[1].jpg" alt="Photography 3" />
+  </div>
+  <p class="image">SAMPLE VIDEO PREVIEW</p>
+ <iframe width="480" height="480" src="https://www.youtube.com/embed/y-CfAf8a9lc" title="6 March 2025" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</section>
+<p>Image album preview</p>
+<iframe width="800" height="800" src=" https://myalbum.com/album/7KctzYtd4kTu49/?invite=fadf319d-7220-4131-ad48-01cd72fa1e29 "></iframe>/>
+  <section id="stakeholders">
+  <h3 style="text-align: center;">Stakeholders</h3>
+  <div class="stakeholders">
+    
+    <!-- Studio Manager -->
+    <div id="box">
+      <div class="profile">
+        <img src="WhatsApp Image 2025-05-21 at 13.57.04_3011d3cb.jpg" class="pic" alt="Studio Manager" />
+      </div>
+      <div class="info">
+        <h3 style="text-align: center;"><i>Studio Manager</i></h3>
+        <p> I'm Elias Mokono Keramb,  a dynamic Studio Manager with a sharp eye for detail and a deep understanding of creative production and digital innovation. Hailing from Ntimaru, Migori County, Kenya, I combine artistic leadership with strategic thinking to guide studio operations smoothly and efficiently. In addition to my creative role, I also serves in the National Treasury, bringing a disciplined, results-driven mindset to every project. My unique blend of financial expertise and creative management ensures that both the artistic and operational aspects of the studio thrive under this leadership.</p>
+      </div>
+    </div>
+
+    <!-- Multimedia Producer -->
+    <div id="box">
+      <div class="profile">
+        <img src="Peachy_20250226_150243381.jpg" class="pic" alt="Multimedia Producer" />
+      </div>
+      <div class="info">
+        <h3 style="text-align: center;"><i>Multimedia Producer</i></h3>
+        <p> I'm Yakadoka Tandaza, a visionary Multimedia Producer based in Ntimaru, Migori County, Kenya. With a deep passion for storytelling through visuals and sound, I specialize in creating compelling content that captures emotion, inspires action, and connects with diverse audiences. From photography and videography to post-production and digital editing, I brings creativity, technical skill, and artistic flair to every project. My work reflects a commitment to excellence and a keen understanding of modern media trends, making me a trusted name in the creative industry.</p>
+      </div>
+    </div>
+
+    <!-- Website Developer -->
+    <div id="box">
+      <div class="profile">
+        <img src="WhatsApp Image 2025-05-20 at 13.31.58_d1e835ca.jpg" class="pic" alt="Website Developer" />
+      </div>
+      <div class="info">
+        <h3 style="text-align: center;"><i>Website Developer</i></h3>
+        <p>I'm Kerambo Francis,a passionate and tech-driven individual from Ntimaru, Migori county, Kenya. I am currently pursuing a degree in computer Science at Kaimosi Friends University. With a strong foundation in technology, I have developed practical skills in web development, Artificial Intelligence(AI), and cyber security. I am committed to leveraging technology to create innovative and secure digital solutions that make a real impact.  </p>
+        <p style="font-family: cursive;">You can reach me Via:</p>
+         <p>
+      <a href="https://wa.me/+254757326142" target="_blank" class="whatsapp-link">
+        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+      </a>
+    </p>
+    <p>
+      <a href="mailto:kerambofrancis7@gmail.com">
+        <i class="fas fa-envelope"></i> email me
+      </a>
+    </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<footer>
+  &copy; 2025
+</footer>
+
+<script>
+const sentence = "Unique Art Media studio";
+    const typingElement = document.getElementById('typing');
+    let index = 0;
+    let isDeleting = false;
+
+    function typeLoop() {
+      if (!isDeleting && index <= sentence.length) {
+        typingElement.textContent = sentence.substring(0, index);
+        index++;
+      } else if (isDeleting && index >= 0) {
+        typingElement.textContent = sentence.substring(0, index);
+        index--;
+      }
+
+      if (index > sentence.length) {
+        isDeleting = true;
+        setTimeout(typeLoop, 1500); // Pause before deleting
+        return;
+      } else if (isDeleting && index === 0) {
+        isDeleting = false;
+      }
+
+      setTimeout(typeLoop, isDeleting ? 40 : 80);
+    }
+
+    typeLoop();
+</script>
+
+
+</body>
+</html>
